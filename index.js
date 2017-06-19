@@ -443,7 +443,7 @@ class ControllerInput {
     })
     this.applyButton = document.createElement('div')
     this.applyButton.className = 'apply-button'
-    this.applyButton.innerText = 'Verkställ'
+    this.applyButton.innerText = 'Apply'
     this.applyButton.addEventListener('click', (e) => {
       this.options.changeCallback(this.inputElement.value, this)
     })
@@ -522,7 +522,7 @@ addEventListener('load', (e) => {
 
   controller = new Controller(controllerElement)
 
-  var startValueInput = new ControllerInput({title: 'Startvärde', changeCallback: (value) => {
+  var startValueInput = new ControllerInput({title: 'Initial value', changeCallback: (value) => {
     if(value == ''){
       startValueInput.value = new Byte().toRawValue()
       value = new Byte().toRawValue()
@@ -531,10 +531,10 @@ addEventListener('load', (e) => {
     if(!validateByte(value)){
       startValueInput.value = startValueInput.defaultValue
       var alert = new Alert({
-        title: 'Meddelande',
-        text: `Den angivna strängen "${value}" går inte att tolka till en Byte.`
+        title: 'Message',
+        text: `The specified string "${value}" can not be interpreted to a value of type Byte.`
       })
-      alert.addAction(new AlertAction('Okej', (alert) => {
+      alert.addAction(new AlertAction('Okay', (alert) => {
         controller.enabled = true
         alert.close()
       }))
@@ -546,9 +546,9 @@ addEventListener('load', (e) => {
     }
   }, defaultValue: '00000000', id: 'startValue'})
 
-  var valueInput = new ControllerInput({title: 'Meddelande', changeCallback: (value) => {
+  var valueInput = new ControllerInput({title: 'Message', changeCallback: (value) => {
     var alert = new Alert({
-      title: 'Meddelande',
+      title: 'Message',
       text: value
     })
     alert.addAction(new AlertAction('OK', (alert) => {
@@ -568,7 +568,7 @@ addEventListener('load', (e) => {
     operationInput.addOption(ops[i])
   }
 
-  var byteInput = new ControllerInput({title: 'Muterare', changeCallback: (value) => {
+  var byteInput = new ControllerInput({title: 'Mutator', changeCallback: (value) => {
     contentLayer.selectedNode.properties.byteValue = new Byte(value)
     node.update()
   }, defaultValue: '00000000', id: 'bytevalue'})
